@@ -34,26 +34,7 @@ int presence_handler(xmpp_conn_t * const conn, xmpp_stanza_t * const stanza, voi
 
 }
 
-#if 0
-int message_handler(xmpp_conn_t * const conn, xmpp_stanza_t * const stanza, void * const userdata)
-{    
-    xmpp_ctx_t *ctx = (xmpp_ctx_t*)userdata;
-    char *intext;
 
-
-    intext = xmpp_stanza_get_text(xmpp_stanza_get_child_by_name(stanza, "body"));
-   	
-    printf("Get message body=\n%s\n", intext);
-  
- 
-    xmpp_free(ctx, intext);
-
-    return 1;
-
-}
-
-#endif
-#if 1
 /* define a handler for connection events */
 void conn_handler(xmpp_conn_t * const conn, const xmpp_conn_event_t status,
                   const int error, xmpp_stream_error_t * const stream_error,
@@ -74,54 +55,11 @@ void conn_handler(xmpp_conn_t * const conn, const xmpp_conn_event_t status,
     }
 
 }
-#endif
 
-void XMPP_Echo_Test(xmpp_conn_t * const conn, xmpp_stanza_t * const stanza, void * const userdata)
-{
-
-#if 0
-    char to[128], from[128];
-    char time_str[128];
-    xmpp_stanza_t *stanza_2;
-
-    stanza_2 = xmpp_stanza_copy(stanza);
-    strcpy(from, xmpp_stanza_get_attribute(stanza, "from"));
-    strcpy(to, xmpp_stanza_get_attribute(stanza, "to"));
-  
-     printf("to =%s, from=%s\n", to, from);
-    time_t tt;
-    xmpp_stanza_set_attribute(stanza_2, "to", from);
-    xmpp_stanza_set_attribute(stanza_2, "from", to);
-    tt = time(NULL);
-   
-    printf("time=[%s]\n", ctime(&tt));
-    xmpp_stanza_set_id(stanza_2,ctime(&tt));
-    xmpp_send(conn, stanza_2);
-    xmpp_stanza_release(stanza_2);
-#endif
-
-
-}
 
 void XMPP_IBB_Close_Send(xmpp_conn_t * const conn, xmpp_stanza_t * const stanza, void * const userdata)
 {
 
-#if 0
-    xmpp_ctx_t *ctx = (xmpp_ctx_t *)userdata;
-    xmpp_stanza_t *iq;
-
-    iq  = xmpp_stanza_new(ctx);
-    xmpp_stanza_set_name(iq, "iq");
-    xmpp_stanza_set_type(iq, "set");
-
-    xmpp_stanza_set_id(iq, xmpp_stanza_get_attribute(stanza, "id"));
-    xmpp_stanza_set_attribute(iq, "to", xmpp_stanza_get_attribute(stanza, "from"));
-    xmpp_stanza_set_attribute(iq, "from", xmpp_stanza_get_attribute(stanza, "to"));
-
-    xmpp_send(conn, iq);
-    xmpp_stanza_release(iq);
-
-#endif
 
 }
 

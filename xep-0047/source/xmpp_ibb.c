@@ -205,12 +205,11 @@ void XMPP_IBB_Ack_Send(xmpp_conn_t * const conn, xmpp_stanza_t * const stanza, v
     xmpp_stanza_release(iq);
 }
 
-#if 1
-/* XMPP_IBB_Close_Send() has not been verified. */
-
+/*  XMPP_IBB_Close_Send() has not been verified. */
 void XMPP_IBB_Close_Send(xmpp_conn_t * const conn, xmpp_stanza_t * const stanza, void * const userdata)
 {
    
+    	
 #if 0
     xmpp_ctx_t *ctx = (xmpp_ctx_t *)userdata;
     xmpp_stanza_t *iq;
@@ -229,7 +228,7 @@ void XMPP_IBB_Close_Send(xmpp_conn_t * const conn, xmpp_stanza_t * const stanza,
 #endif
 
 }
-#endif
+
 
 xmpp_ibb_session_t* XMPP_IBB_Init()
 {
