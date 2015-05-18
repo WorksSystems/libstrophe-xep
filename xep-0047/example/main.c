@@ -31,12 +31,13 @@ void Get_IBB_Data()
         if(XMPP_IBB_Get_Recv() != NULL)
         {
 	    printf("Get IBB Data=[%s]\n", XMPP_IBB_Get_Recv());
+	     printf("main gStanza=[%d]\n",  XMPP_IBB_Get_gStanza());
 	    if(XMPP_IBB_Get_gStanza() !=NULL)
             	 XMPP_IBB_SendPayload(conn, XMPP_IBB_Get_gStanza(), \
 		  (void*)ctx, XMPP_IBB_Get_Recv() );//Echo test
 
-   //         XMPP_IBB_Reset_Recv();
- //           XMPP_IBB_Reset_gStanza();
+            XMPP_IBB_Reset_Recv();
+            XMPP_IBB_Reset_gStanza();
         }
 
     }
