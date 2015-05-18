@@ -74,19 +74,11 @@ int XMPP_IBB_Data_Process(xmpp_conn_t * const conn, xmpp_stanza_t * const stanza
     char* intext;
     unsigned char *result;
     xmpp_ctx_t *ctx = (xmpp_ctx_t*)userdata;
-    char *szSid, szSeq;	
-//    xmpp_ibb_session_t* ibb_ssn;
     
-
-    szSid = \
-	xmpp_stanza_get_attribute(xmpp_stanza_get_child_by_name(stanza, "data"), "sid");
- 
-    szSeq = \ 
-	xmpp_stanza_get_attribute(xmpp_stanza_get_child_by_name(stanza, "data"), "seq");
  
     intext = xmpp_stanza_get_text(xmpp_stanza_get_child_by_name(stanza, "data"));
 
-    printf("[Sid=%s][Seq=%s][Raw Data=%s]\n", szSid, szSeq, intext);
+    printf("[Raw Data=%s]\n",  intext);
     result = base64_decode(ctx, intext, strlen(intext));
     printf("Decode result=%s\n", result);
 
@@ -117,8 +109,7 @@ int XMPP_IBB_Data_Process(xmpp_conn_t * const conn, xmpp_stanza_t * const stanza
 #endif
 
 error:
-    xmpp_free(ctx, szSid);
-    xmpp_free(ctx, szSeq);
+    
     xmpp_free(ctx, intext);
     xmpp_free(ctx, result);
 
