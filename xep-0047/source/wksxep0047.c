@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "xmppclient.h"
+#include "wksxep0047.h"
 #include "xmpp_ibb.h"
 
 #include <strophe.h>

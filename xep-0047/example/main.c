@@ -8,7 +8,7 @@
 #include <strophe.h>
 #include "common.h"
 
-#include "xmppclient.h"
+#include "wksxep0047.h"
 #include "xmpp_ibb.h"
 
 xmpp_conn_t*  XMPP_Init(char* jid, char* pass, char* host, xmpp_ctx_t  **pctx);
