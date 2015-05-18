@@ -1,6 +1,6 @@
 
-        Works' XEP-0047 extension code contributions are shared under the 
-Apache 2.0 license
+        Works Systems' XEP-0047 extension code contributions are shared 
+under the Apache 2.0 license
         
         This library is used to support XEP-0047 basing on libstrophe. This library support IBB responder accepts session and get session information,
 such as Sid/Block-size from IBB Initiator.
