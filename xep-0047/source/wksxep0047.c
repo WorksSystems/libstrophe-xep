@@ -8,6 +8,8 @@
 #include <strophe.h>
 #include "common.h"
 
+
+/* Call back function to process received presence stanza */
 int presence_handler(xmpp_conn_t * const conn, xmpp_stanza_t * const stanza, void * const userdata)
 {
     xmpp_stanza_t *pres;
@@ -36,6 +38,9 @@ int presence_handler(xmpp_conn_t * const conn, xmpp_stanza_t * const stanza, voi
 
 
 /* define a handler for connection events */
+/*This is the first callback function called by libstrophe and is used to
+register another callback function. This function will be called only ance.
+ */
 void conn_handler(xmpp_conn_t * const conn, const xmpp_conn_event_t status,
                   const int error, xmpp_stream_error_t * const stream_error,
                   void * const userdata)
@@ -56,14 +61,14 @@ void conn_handler(xmpp_conn_t * const conn, const xmpp_conn_event_t status,
 
 }
 
-
+/*Send  IBB "</close>" to XMPP server to terminate  IBB session */
 void XMPP_IBB_Close_Send(xmpp_conn_t * const conn, xmpp_stanza_t * const stanza, void * const userdata)
 {
 
 
 }
 
-
+/*Send XMPP Presence to XMPP server*/
 void XMPP_Presence(xmpp_conn_t* conn)
 {
 
@@ -84,6 +89,7 @@ void XMPP_Presence(xmpp_conn_t* conn)
 
 }
 
+/*XMPP Init, Get XMPP connection object by JID, Password, Host*/
 xmpp_conn_t*  XMPP_Init(char* jid, char* pass, char* host, xmpp_ctx_t  **pctx)
 {
     xmpp_conn_t *conn;
@@ -110,6 +116,8 @@ xmpp_conn_t*  XMPP_Init(char* jid, char* pass, char* host, xmpp_ctx_t  **pctx)
     return conn;
 }
 
+
+/*Register IBB CB function, not verified.*/
 void Register_IBB_CB(xmpp_conn_t* conn, char* host, \
 unsigned short port, xmpp_conn_handler callback )
 {
@@ -125,7 +133,7 @@ unsigned short port, xmpp_conn_handler callback )
 
 }
 
-
+/*Disconnect the connection between XMPP server and shutdown XMPP library*/
 void XMPP_Close(xmpp_ctx_t *ctx,  xmpp_conn_t *conn)
 {
 
