@@ -68,6 +68,7 @@ int XMPP_IBB_handler(xmpp_conn_t * const conn, xmpp_stanza_t * const stanza, voi
     return 1;
 }
 
+/* Process XEP-0047 data,and decode base64 data*/
 int XMPP_IBB_Data_Process(xmpp_conn_t * const conn, xmpp_stanza_t * const stanza, void * const userdata)
 {
 
@@ -179,7 +180,7 @@ void * const userdata, char* resp )
 }
 
 
-
+/* Send XEP-0047 result stanza */
 void XMPP_IBB_Ack_Send(xmpp_conn_t * const conn, xmpp_stanza_t * const stanza, void * const userdata)
 {
     xmpp_ctx_t *ctx = (xmpp_ctx_t *)userdata;
@@ -220,7 +221,7 @@ void XMPP_IBB_Close_Send(xmpp_conn_t * const conn, xmpp_stanza_t * const stanza,
 
 }
 
-
+/* Initialize IBB handle. */
 xmpp_ibb_session_t* XMPP_IBB_Init()
 {
   
@@ -234,11 +235,13 @@ xmpp_ibb_session_t* XMPP_IBB_Init()
 	
     return gXMPP_IBB_handle;	
 }
+/* Get IBB handle in order to get Session ID */
 xmpp_ibb_session_t* XMPP_Get_IBB_Handle()
 {
     return gXMPP_IBB_handle;
 }
 
+/* Get IBB Session Handle by Sid in order to get blocksize, data payload */
 xmpp_ibb_session_t* XMPP_Get_IBB_Session_Handle(char* szSid)
 {
     xmpp_ibb_session_t* ibb_ssn_p  = XMPP_Get_IBB_Handle();
@@ -255,6 +258,7 @@ xmpp_ibb_session_t* XMPP_Get_IBB_Session_Handle(char* szSid)
 
 }
 
+/*Add a session to the Queue */
 void  XMPP_IBB_Add_Session_Queue(xmpp_ibb_session_t* ibb_ssn_new)
 {
     xmpp_ibb_session_t* ibb_ssn_p  = XMPP_Get_IBB_Handle();
@@ -269,6 +273,7 @@ void  XMPP_IBB_Add_Session_Queue(xmpp_ibb_session_t* ibb_ssn_new)
    
 }
 
+/* Add a datapayload to a session queue, wait for process  */
 void XMPP_IBB_Add_Session_Data_Queue(xmpp_ibb_session_t* ibb_ssn, \
 xmpp_ibb_data_t*  ibb_data_new)
 {
@@ -286,6 +291,7 @@ xmpp_ibb_data_t*  ibb_data_new)
 
 }
 
+/*Get the data from session queue*/
 void XMPP_IBB_Del_Session_Data_Queue(xmpp_ibb_session_t* ibb_ssn)
 {
 
@@ -299,11 +305,13 @@ void XMPP_IBB_Del_Session_Data_Queue(xmpp_ibb_session_t* ibb_ssn)
 
 }
 
+/* Get recently IBB received data buffer. This is temporality function and departed when multi session function is supported*/
 char* XMPP_IBB_Get_Recv()
 {   
     return gRecv;
 }
 
+/* Clean IBB received data buffer. This is temporality function and departed when multi session function is supported. */
 void XMPP_IBB_Reset_Recv()
 {
      if(gRecv !=NULL)
@@ -313,11 +321,13 @@ void XMPP_IBB_Reset_Recv()
 }
 
 
+/* Get recently IBB received stanza handle. This is temporality function and departed when multi session function is supported. */
 xmpp_stanza_t* XMPP_IBB_Get_gStanza()
 {
     return gStanza;	
 }
 
+/* Clear received Stanza. This is temporality function and departed when multi session function is supported.*/
 void XMPP_IBB_Reset_gStanza()
 {
 
